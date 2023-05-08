@@ -1,0 +1,31 @@
+.layoutList {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 5px;
+  margin: 10px;
+}
+
+.layoutItem {
+  margin: 0 1rem;
+  list-style-type: none;
+}
+
+.homeLink,
+.moviesLink {
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #010f1e;
+  color: #fff;
+  border-radius: 0.25rem;
+  transition: background-color 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+.homeLink:hover,
+.moviesLink:hover {
+  background-color: #a6a0ae;
+  font-weight: bold;
+  color: #010f1e;
+}

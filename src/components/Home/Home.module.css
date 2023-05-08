@@ -1,0 +1,40 @@
+.homeList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-left: 0;
+  justify-content: center;
+}
+
+.homeTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.homeItem {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  margin: 0.2rem;
+}
+
+.homeItem:hover {
+  color: #000;
+  transform: scale(1.05);
+}
+
+.moviePoster {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.movieTitle {
+  font-weight: 600;
+  margin-top: 15px;
+  width: 250px;
+}

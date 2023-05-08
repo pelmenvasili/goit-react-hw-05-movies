@@ -1,0 +1,59 @@
+.searchInput {
+  background-color: gray;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 8px;
+}
+
+.searchBtn {
+  background-color: #261418;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.movieTitle {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  font-weight: 600;
+  width: 250px;
+}
+
+.moviePoster {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-left: 0;
+  justify-content: center;
+}
+
+.movieItem {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+  margin: 0.2rem;
+}
+
+.movieItem:hover {
+  color: #000;
+  transform: scale(1.05);
+}
+
+.container {
+  margin-left: 30px;
+}
