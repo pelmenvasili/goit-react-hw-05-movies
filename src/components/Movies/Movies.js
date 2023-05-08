@@ -21,7 +21,7 @@ const Movies = () => {
       fetch(URL)
         .then(r => r.json())
         .then(data => setMovies(prevMovies => [...prevMovies, ...data.results]))
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
     }
   }, [URL, query, setMovies]);
 
@@ -55,27 +55,32 @@ const Movies = () => {
           Search
         </button>
       </div>
-      <ul className={css.movieList}>
-        {movies.map(movie => (
-          <Link
+
+      {movies.length === 0 && query.trim() !== '' ? (
+        <p>No movies found with the title "{query}"</p>
+      ) : (
+        <ul className={css.movieList}>
+          {movies.map(movie => (
+            <li key={movie.id} className={css.movieItem}>
+                <Link
             to={`/movies/${movie.id}`}
             state={{ from: location }}
             key={`${movie.id}`}
             className={css.movieItem}
           >
-            <img
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-              alt="movie poster"
-              className={css.moviePoster}
-              width="250"
-              height="350"
-            />
-            <p className={css.movieTitle}>
-              {movie.title} {movie.name}
-            </p>
-          </Link>
-        ))}
-      </ul>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  alt="movie poster"
+                  className={css.moviePoster}
+                  width="250"
+                  height="350"
+                />
+                <p className={css.movieTitle}>{movie.title || movie.name}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
