@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import css from './MoviesList.module.css';
 import noImage from '../Cast/noimage.png';
+import PropTypes from 'prop-types';
 
 const MoviesList = ({ movies, state }) => {
   return (
@@ -31,6 +32,21 @@ const MoviesList = ({ movies, state }) => {
       ))}
     </ul>
   );
+};
+
+MoviesList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string,
+      title_original: PropTypes.string,
+      name: PropTypes.string,
+      poster_path: PropTypes.string,
+    }).isRequired
+  ),
+  state: PropTypes.shape({
+    from: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
 export default MoviesList;
