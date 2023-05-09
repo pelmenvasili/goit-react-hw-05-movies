@@ -2,43 +2,55 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import css from './Cast.module.css';
 import noImage from './noimage.png';
+import { fetchMovieCast } from 'services/services';
+import Loader from 'components/Loader/Loader';
 
 const Cast = () => {
   const { movieId } = useParams();
-  const API_KEY = '85aded699850148534e98bbdd6991e7d';
-  const URL = `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}&language=en-US`;
   const [cast, setCast] = useState([]);
+  const [error, setError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(URL)
-      .then(response => response.json())
-      .then(data => setCast(data.cast))
-      .catch(error => console.log(error));
-  }, [URL]);
+    try {
+      setLoading(true);
+      const getMovieCast = async () => {
+        const movieCast = await fetchMovieCast(movieId);
+        setCast(movieCast.cast);
+      };
+      getMovieCast();
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        setError(true);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [movieId]);
+
+  if (cast.length === 0) {
+    return <p>There are no cast for this movie.</p>;
+  }
 
   return (
     <>
+      {isLoading && <Loader />}
+      {error && <h2>There are no cast for this movie.</h2>}
       <h2 className={css.castHeading}>Cast</h2>
       <ul className={css.castList}>
         {cast.map(actor => (
-          <li key={actor.id} className={css.castItem}>
-            {actor.profile_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
-                className={css.castImage}
-                alt={actor.name}
-                width="150"
-                height="225"
-              />
-            ) : (
-              <img
-                src={noImage}
-                alt="placeholder"
-                width="200"
-                height="225"
-                className={css.castImage}
-              ></img>
-            )}
+          <li key={actor.id || actor.cast_id} className={css.castItem}>
+            <img
+              src={
+                actor.profile_path
+                  ? `https://image.tmdb.org/t/p/w200${actor.profile_path}`
+                  : noImage
+              }
+              className={css.castImage}
+              alt={actor.name}
+              width="150"
+              height="225"
+            />
             <p>
               <b className={css.actorName}>Name:</b> {actor.name}
             </p>
